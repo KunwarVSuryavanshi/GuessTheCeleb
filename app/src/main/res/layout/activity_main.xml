@@ -38,27 +38,27 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:tag="op1"
-                android:text="b" />
+                android:text=" " />
 
             <Button
                 android:id="@+id/option2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="celebChosen"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text=" "
                 android:tag="op2"
-                android:onClick="celebChosen"/>
+                android:text=" " />
 
             <Button
                 android:id="@+id/option3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="celebChosen"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text=" "
                 android:tag="op3"
-                android:onClick="celebChosen"/>
+                android:text=" " />
 
             <Button
                 android:id="@+id/option4"

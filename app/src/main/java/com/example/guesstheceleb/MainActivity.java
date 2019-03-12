@@ -7,7 +7,10 @@ import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +30,20 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> celebName = new ArrayList<String>();
     ArrayList<String> imageLink = new ArrayList<String>();
     ImageView celebImageView;
+    Button b1,b2,b3,b4;
+    String[] answer = new String[4];
+
     int chosenCeleb = 0;
+    int opt = 0;
+    public void celebChosen (View view) throws ExecutionException, InterruptedException {
+            if(view.getTag().toString().equals(Integer.toString(opt))){
+                Toast.makeText(getApplicationContext(),"Correct",Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Wrong! It was " +celebName.get(chosenCeleb),Toast.LENGTH_LONG).show();
+            }
+            genQues();
+    }
 
     public class ImageTask extends AsyncTask<String, Void, Bitmap>{
 
@@ -100,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         celebImageView = (ImageView)findViewById(R.id.celebImage);
+        Button b1 = (Button) findViewById(R.id.option1);
+        Button b2 = (Button) findViewById(R.id.option2);
+        Button b3 = (Button) findViewById(R.id.option3);
+        Button b4 = (Button) findViewById(R.id.option4);
 
         DownloadTask task = new DownloadTask();
         String result = null;
@@ -124,18 +144,42 @@ public class MainActivity extends AppCompatActivity {
             {
                 celebName.add(m.group(1));
             }
-
-            Random random = new Random();
-            chosenCeleb = random.nextInt(imageLink.size());
-            ImageTask downld = new ImageTask();
-            Bitmap celeImage;
-            celeImage = downld.execute(imageLink.get(chosenCeleb)).get();
-            celebImageView.setImageBitmap(celeImage);
+            genQues();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+    }
+    public void genQues() throws ExecutionException, InterruptedException {
+        Random random = new Random();
+        chosenCeleb = random.nextInt(imageLink.size());
+        ImageTask downld = new ImageTask();
+        Bitmap celeImage;
+        celeImage = downld.execute(imageLink.get(chosenCeleb)).get();
+        celebImageView.setImageBitmap(celeImage);
+        Random random1 = new Random();
+        opt = random1.nextInt(4);
+        int inopt=0;
+
+        for(int i=0;i<4;i++){
+
+            if(i==opt){
+
+                answer[i] = celebName.get(opt);
+            }
+            else{
+                inopt = random1.nextInt(imageLink.size());
+                while (inopt == opt){
+                    inopt = random1.nextInt(imageLink.size());
+                }
+                answer[i]= celebName.get(inopt);
+            }
+        }
+        b1.setText(answer[0]);
+        b2.setText(answer[1]);
+        b3.setText(answer[2]);
+        b4.setText(answer[3]);
     }
 }
