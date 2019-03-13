@@ -30,17 +30,21 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> celebName = new ArrayList<String>();
     ArrayList<String> imageLink = new ArrayList<String>();
     ImageView celebImageView;
-    Button b1,b2,b3,b4;
+    Button b1;
+    Button b2;
+    Button b3;
+    Button b4;
     String[] answer = new String[4];
-
+    int inopt = 0;
     int chosenCeleb = 0;
     int opt = 0;
+
     public void celebChosen (View view) throws ExecutionException, InterruptedException {
             if(view.getTag().toString().equals(Integer.toString(opt))){
                 Toast.makeText(getApplicationContext(),"Correct",Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(getApplicationContext(),"Wrong! It was " +celebName.get(chosenCeleb),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Wrong! It was " + celebName.get(chosenCeleb),Toast.LENGTH_LONG).show();
             }
             genQues();
     }
@@ -58,11 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap mybitmap = BitmapFactory.decodeStream(is);
                 return mybitmap;
 
-            } catch (IOException e) {
-
-                e.printStackTrace();
-
-            } catch (Exception e) {
+            }catch (Exception e) {
 
                 e.printStackTrace();
 
@@ -116,10 +116,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         celebImageView = (ImageView)findViewById(R.id.celebImage);
-        Button b1 = (Button) findViewById(R.id.option1);
-        Button b2 = (Button) findViewById(R.id.option2);
-        Button b3 = (Button) findViewById(R.id.option3);
-        Button b4 = (Button) findViewById(R.id.option4);
+        b1 = (Button) findViewById(R.id.opt1);
+        b2 = (Button) findViewById(R.id.opt2);
+        b3 = (Button) findViewById(R.id.opt3);
+        b4 = (Button) findViewById(R.id.opt4);
 
         DownloadTask task = new DownloadTask();
         String result = null;
@@ -161,15 +161,14 @@ public class MainActivity extends AppCompatActivity {
         celebImageView.setImageBitmap(celeImage);
         Random random1 = new Random();
         opt = random1.nextInt(4);
-        int inopt=0;
 
         for(int i=0;i<4;i++){
 
             if(i==opt){
 
-                answer[i] = celebName.get(opt);
+                answer[i] = celebName.get(chosenCeleb);
             }
-            else{
+            else {
                 inopt = random1.nextInt(imageLink.size());
                 while (inopt == opt){
                     inopt = random1.nextInt(imageLink.size());

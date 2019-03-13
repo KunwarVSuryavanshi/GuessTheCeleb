@@ -31,7 +31,7 @@
             android:paddingRight="10dp">
 
             <Button
-                android:id="@+id/option1"
+                android:id="@+id/opt1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="celebChosen"
@@ -41,7 +41,7 @@
                 android:text=" " />
 
             <Button
-                android:id="@+id/option2"
+                android:id="@+id/opt2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="celebChosen"
@@ -51,7 +51,7 @@
                 android:text=" " />
 
             <Button
-                android:id="@+id/option3"
+                android:id="@+id/opt3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="celebChosen"
@@ -61,14 +61,14 @@
                 android:text=" " />
 
             <Button
-                android:id="@+id/option4"
+                android:id="@+id/opt4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="celebChosen"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text=" "
                 android:tag="op4"
-                android:onClick="celebChosen"/>
+                android:text=" " />
 
         </LinearLayout>
 
